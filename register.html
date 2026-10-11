@@ -1383,31 +1383,6 @@ passwordToggle.addEventListener(
     }
 );
 
-
-/* =========================
-   REFERRAL CODE
-========================= */
-
-function createReferralCode(username){
-
-    const cleanUsername =
-        String(username)
-        .trim()
-        .replace(/[^a-zA-Z0-9_-]/g,"")
-        .toUpperCase();
-
-    if(cleanUsername){
-        return cleanUsername;
-    }
-
-    return "JV" +
-        Math.random()
-        .toString(36)
-        .substring(2,8)
-        .toUpperCase();
-}
-
-
 /* =========================
    SHOW MESSAGE
 ========================= */
@@ -1708,51 +1683,7 @@ document
 
         try{
 
-            /* =========================
-               SEND TO SERVER
-            ========================= */
-
-            const response =
-                await fetch(
-                    "/api/register",
-                    {
-                        method:"POST",
-
-                        headers:{
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        credentials:"include",
-
-                        body:JSON.stringify({
-
-                            fullName:name,
-
-                            username:username,
-
-                            email:email,
-
-                            phone:phone,
-
-                            password:password,
-
-                            /*
-                             * Send BOTH names so the
-                             * backend can receive the
-                             * selected plan whether it
-                             * reads "plan" or "package".
-                             */
-
-                            plan:apiPlan,
-
-                            package:plan
-
-                        })
-                    }
-                );
-
-
+          
             /* =========================
                READ RESPONSE
             ========================= */
@@ -1894,7 +1825,7 @@ document
             );
 
             buttonText.textContent =
-                "Opening Dashboard...";
+                "Opening payment...";
 
 
             /* =========================
